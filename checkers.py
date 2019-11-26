@@ -35,8 +35,8 @@ def remove_piece(state,piece, x,y, ):
     """
     #create random number generator to decide the probability
     #probability =
-
-    state [piece][x][y] = 0
+    if(P>random):
+        state [piece][x][y] = 0
     return state
 
 def soldier_moves(state):
