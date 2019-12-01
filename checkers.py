@@ -1,6 +1,7 @@
 import numpy as np
 from random import * #for random number generator
 
+
 def state_from_board(board):
     """
     The state_from_board takes board as an input
@@ -39,18 +40,18 @@ def remove_piece(state,piece, x,y, ):
         state [piece][x][y] = 0
     return state
 
-def soldier_moves(state):
-    #to be finished
-    numrows = len(state)  # number of rows
-    numcols = len(state[0])  # number of columns
-    count = 0 #count state as the number of possible moves
-    for i in range (numrows):
-        for j in range (numcols):
-            if (state[i][j]==1) and j<numcols-1
-                count += (state[i+1][j+1])
-                count += (state[i+1][])
-
-    return count
+#def soldier_moves(state):
+#    #to be finished
+#    numrows = len(state)  # number of rows
+#    numcols = len(state[0])  # number of columns
+#    count = 0 #count state as the number of possible moves
+#    for i in range (numrows):
+#        for j in range (numcols):
+#            if (state[i][j]==1) and (j<numcols-1):
+#                count += (state[i+1][j+1])
+#                count += (state[i+1][])
+#
+#    return count
 
 
 def turn_to_king(state,piece,x,y):
@@ -97,6 +98,12 @@ def expand_board(board):
     return e_board
 
 
+
+"""
+Test comment, purely useless
+"""
+
+
 if __name__ == "__main__":
 
     board = np.array([[1, 0, 0, 0],
@@ -114,3 +121,8 @@ if __name__ == "__main__":
     print('a',a)
     print('b',b)
     print('c',c)
+
+
+
+
+
