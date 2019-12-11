@@ -249,9 +249,10 @@ def get_moves(board,space,player):
 
 
 """
-Collect all the possible moves a player can make 
-A move within the return list is represented as a pair or pairs-
-  one pair for a piece's location, and one pair for the move it can make
+Use this as the oracle
+Get list of all the possible moves a player can make 
+A move is represented within the return list as a pair of pairs-
+  one pair for a piece's location, and one pair for a move it can make
 """
 def get_all_moves(board,player):
 
@@ -506,15 +507,6 @@ def gameloop(nrows,ncols):
     # 
 
 
-
-    
-"""
-This is the Oracle
-The branching factor is the length of the return list
-
-def legal_moves(board, space, player):
-    filter( lambda x: test_move(board,space,player)    # worry about filtering the nonwhites later
-"""    
 
 
 
