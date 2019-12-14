@@ -36,10 +36,12 @@ def apply_move(board, space, move, player):Apply a move to the board
 def isTerminal(board): The game is considered ended if one team is wiped out
 def gameloop(nrows,ncols): Play function
 ```
-With the function initial_board, it generates a board with 3\*boardlength white pawns(soldiers) and black pawns(soldiers).
 ![](https://github.com/jbot2000/autocheck/blob/master/initial_state1.png)
-The print_board function will give a visulaized 
+With the function initial_board, it generates a board with 3\*boardlength white pawns(soldiers) 
+and black pawns(soldiers).
+
 ![](https://github.com/jbot2000/autocheck/blob/master/initial_state2.png)
+The print_board function will give a visulaized 
 
 # MCTS Functions
 Tese functions will define all the node classes, and the functions to run the tree search.
