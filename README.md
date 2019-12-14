@@ -30,16 +30,16 @@ def get_all_moves(board,player)
 def get_jumps(board,space,player)
 def isBlackpiece(a), def isWhitepiece(a): Takes integer that represents the type of piece
 Returns boolean - whether or not the piece is black (or white)
-def isFriendly(a,player)
-def isEnemy(a,player)
+def isFriendly(a,player), def isEnemy(a,player): Check if a pirece is an enemy or not
 def test_move(board,space,move,player)
 def apply_move(board, space, move, player):Apply a move to the board
 def isTerminal(board): The game is considered ended if one team is wiped out
 def gameloop(nrows,ncols): Play function
 ```
-With the function initial_board, it generates a board with 3\*boardlength white pawns(soldiers) and 
-![](https://github.com/jbot2000/autocheck/blob/master/initial_state1.png=50x150)
-![](https://github.com/jbot2000/autocheck/blob/master/initial_state2.png=150x150)
+With the function initial_board, it generates a board with 3\*boardlength white pawns(soldiers) and black pawns(soldiers).
+![](https://github.com/jbot2000/autocheck/blob/master/initial_state1.png)
+The print_board function will give a visulaized 
+![](https://github.com/jbot2000/autocheck/blob/master/initial_state2.png)
 
 # MCTS Functions
 Tese functions will define all the node classes, and the functions to run the tree search.
@@ -52,5 +52,7 @@ def policy(node, temp=1): To calculate the policy
 def MCTS_self_play(): The self play function
 ```
 # CNN class
+
+
 
 # Training
