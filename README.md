@@ -8,6 +8,8 @@ Will be varied through 8,10,12,14,16
 The game follows most os the rule of checkers with two majority of changes: 1. When jumping accross an enemy, the enemy will be remove base on a probability, so it is not guarantee to be removed. 2. When a pawn(soldier) reach the last row of the opponents territory, it holds a probability of turning into a king, so it is not guarantee to turn into a king as well.
 # How to run
 # Game Functions
+![alt text](https://github.com/jbot2000/autocheck/blob/master/initial_state1.png)
+![alt text](https://github.com/jbot2000/autocheck/blob/master/initial_state2.png)
 ```bash
 def make_king(board,space): Switch a pawn(soldier) to a king
 def isKing(board,space): Check if a piece is king
