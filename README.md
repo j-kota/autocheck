@@ -10,8 +10,6 @@ In the repository,
 The game follows most os the rule of checkers with two majority of changes: 1. When jumping accross an enemy, the enemy will be remove base on a probability, so it is not guarantee to be removed. 2. When a pawn(soldier) reach the last row of the opponents territory, it holds a probability of turning into a king, so it is not guarantee to turn into a king as well.
 # How to run
 # Game Functions
-![alt text](https://github.com/jbot2000/autocheck/blob/master/initial_state1.png)
-![alt text](https://github.com/jbot2000/autocheck/blob/master/initial_state2.png)
 ```bash
 def make_king(board,space): Switch a pawn(soldier) to a king
 def isKing(board,space): Check if a piece is king
@@ -38,8 +36,11 @@ def test_move(board,space,move,player)
 def apply_move(board, space, move, player):Apply a move to the board
 def isTerminal(board): The game is considered ended if one team is wiped out
 def gameloop(nrows,ncols): Play function
-
 ```
+With the function initial_board, it generates a board with 3\*boardlength white pawns(soldiers) and 
+![](https://github.com/jbot2000/autocheck/blob/master/initial_state1.png=50x150)
+![](https://github.com/jbot2000/autocheck/blob/master/initial_state2.png=150x150)
+
 # MCTS Functions
 Tese functions will define all the node classes, and the functions to run the tree search.
 ```bash
