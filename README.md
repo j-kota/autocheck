@@ -37,4 +37,12 @@ def gameloop(nrows,ncols): Play function
 
 ```
 # MCTS Functions
+```bash
+class ParentRootNode(object)
+class Node(object)
+def MCTS_Search_AI(board, player, num_reads, n_net): Do MCST with neural network
+def MCTS_Search(board, player, num_reads): Do MCST with neural network
+def policy(node, temp=1): To calculate the policy
+def MCTS_self_play(): The self play function
 
+```
