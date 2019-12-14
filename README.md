@@ -1,5 +1,9 @@
 # autocheck
 AI for Checkers
+# Reference and model
+https://github.com/plkmo/AlphaZero_Connect4
+# Game Size
+Will be varied through 8,10,12,14,16
 # Game Rules
 The game follows most os the rule of checkers with two majority of changes: 1. When jumping accross an enemy, the enemy will be remove base on a probability, so it is not guarantee to be removed. 2. When a pawn(soldier) reach the last row of the opponents territory, it holds a probability of turning into a king, so it is not guarantee to turn into a king as well.
 # How to run
@@ -27,9 +31,10 @@ Returns boolean - whether or not the piece is black (or white)
 def isFriendly(a,player)
 def isEnemy(a,player)
 def test_move(board,space,move,player)
-def apply_move(board, space, move, player)
-def isTerminal(board)
-def gameloop(nrows,ncols)
+def apply_move(board, space, move, player):Apply a move to the board
+def isTerminal(board): The game is considered ended if one team is wiped out
+def gameloop(nrows,ncols): Play function
 
 ```
+# MCTS Functions
 
