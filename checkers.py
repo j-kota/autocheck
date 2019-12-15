@@ -6,6 +6,9 @@ from random import * #for random number generator
 
 """
 Conventions
+
+Player 1 is White
+Player 2 is Black
          0: empty space
          1: Black Pawn
          2: White Pawn
@@ -320,6 +323,7 @@ def isWhitepiece(a):
     if (0 <= a <= 5):
         return ((a == 2) or (a == 4))
     else:
+        print(a)
         raise ValueError("An invalid piece type was passed to the isWhitepiece function.")
 
 
@@ -412,7 +416,7 @@ def test_move(board,space,move,player):
 Apply a move to the board
 """
         #nparray,duple,duple,int <- all int 
-def apply_move(board, space, move, player):     #test
+def apply_move(board, space, move, player, jump_failure_probability=0.0 ):     
 
     if not test_move(board, space, move, player):
         raise ValueError("Invalid move applied")
@@ -435,11 +439,14 @@ def apply_move(board, space, move, player):     #test
         newboard[i,j] = 0
         destination = (ni,nj)
     else:
-        # implement randomness here when ready
-        newboard[ni,nj] = 0
-        newboard[Ni,Nj] = board[i,j]
-        newboard[i,j] = 0
+        newboard[Ni,Nj] = board[i,j]    #jumping player lands in nextspace 
+        newboard[i,j] = 0               #jumping player leaves original space
         destination = (Ni,Nj)
+
+        r = random()
+        # if the jump doesn't fail, remove the enemy piece
+        if not (r < jump_failure_probability):  # remember to use random seed at the right place
+            newboard[ni,nj] = 0
 
     # make king if the boundary is reached
     (i,j) = destination
@@ -453,27 +460,64 @@ def apply_move(board, space, move, player):     #test
 """
 The game is considered ended if one team is wiped out
 """
-def isTerminal(board):
-    return (  (not ((1 in board) or (3 in board)))  or  (not ((1 in board) or (3 in board)))   )
+def isTerminal(board,player):
+    if (  (not ((1 in board) or (3 in board)))  or  (not ((2 in board) or (4 in board)))   ):
+        return True
+    if len(get_all_moves(board,player)) == 0:
+        return True
 
 
+# time_run_out is a bool that indicates whether the alotted number of moves has expired
+def terminalValue(board, player, time_run_out=False):
 
+    if not isTerminal(board,player):
+        raise ValueError("The terminal_Value function was called on a game state that is not terminal")
+    
+    # time out leads to a draw
+    if time_run_out:
+        return 0.0
+    
+    # if either player doesn't have a valid move, call it a draw by default
+    if len(get_all_moves(board,player)) == 0:
+        return -1.0
+    
+    # if all the black pieces are wiped out
+    if (not ((1 in board) or (3 in board))):
+        if player == 1: #white
+            return 1.0
+        else:
+            return -1.0
+        
+    # if all the white pieces are wiped out
+    if (not ((2 in board) or (4 in board))):
+        if player == 2: #black
+            return 1.0
+        else:
+            return -1.0
+        
+    
+
+"""
+The purpose of the interactive game loop
+ is mostly for testing the main functions and
+ for illustration of how the functions are used
+"""
 def gameloop(nrows,ncols):
 
     player = 1   #used to tell whose turn it is 
     board = initial_board(nrows,ncols)
-    board = np.array([[-1,1,-1,1,-1,1,-1,1,-1,0,-1,1],
-                      [1,-1,1,-1,1,-1,1,-1,1,-1,2,-1],
-                      [-1,1,-1,1,-1,1,-1,0,-1,1,-1,0],
-                      [0,-1,0,-1,0,-1,0,-1,0,-1,0,-1],
-                      [-1,0,-1,0,-1,0,-1,0,-1,0,-1,0],
-                      [0,-1,0,-1,1,-1,0,-1,1,-1,0,-1],
-                      [-1,0,-1,2,-1,0,-1,2,-1,0,-1,0],
-                      [0,-1,0,-1,0,-1,0,-1,0,-1,0,-1],
-                      [-1,0,-1,0,-1,0,-1,0,-1,0,-1,0],
-                      [0,-1,2,-1,2,-1,2,-1,2,-1,0,-1],
-                      [-1,2,-1,2,-1,2,-1,2,-1,2,-1,2],
-                      [2,-1,2,-1,2,-1,2,-1,2,-1,2,-1]])
+    board = np.array([[5,1,5,1,5,1,5,1,5,0,5,1],
+                      [1,5,1,5,1,5,1,5,1,5,2,5],
+                      [5,1,5,1,5,1,5,0,5,1,5,0],
+                      [0,5,0,5,0,5,0,5,0,5,0,5],
+                      [5,0,5,0,5,0,5,0,5,0,5,0],
+                      [0,5,0,5,1,5,0,5,1,5,0,5],
+                      [5,0,5,2,5,0,5,2,5,0,5,0],
+                      [0,5,0,5,0,5,0,5,0,5,0,5],
+                      [5,0,5,0,5,0,5,0,5,0,5,0],
+                      [0,5,2,5,2,5,2,5,2,5,0,5],
+                      [5,2,5,2,5,2,5,2,5,2,5,2],
+                      [2,5,2,5,2,5,2,5,2,5,2,5]])
                       
                       
     print_board(board)
@@ -506,10 +550,10 @@ def gameloop(nrows,ncols):
                 print("Invalid move, try again:")
                 print("\n")
 
-        board = apply_move(board,space,move,player)
+        board = apply_move(board,space,move,player,1.0)
         print_board(board)
         player = switch_player(player)
-        if isTerminal(board):
+        if isTerminal(board,player):
             print("Checkmate!!!")
     
     
@@ -536,6 +580,22 @@ if __name__ == "__main__":
 
     gameloop(12,12)
 
+    """
+    board = np.array([[5,0,5,0,5,0,5,0,5,1],
+                      [0,5,0,5,0,5,0,5,2,5],
+                      [5,0,5,0,5,0,5,2,5,0],
+                      [0,5,0,5,0,5,0,5,0,5],
+                      [5,0,5,0,5,0,5,0,5,0],
+                      [0,5,0,5,0,5,0,5,0,5],
+                      [5,0,5,0,5,0,5,0,5,0],
+                      [0,5,0,5,0,5,0,5,0,5],
+                      [5,0,5,0,5,0,5,0,5,0],
+                      [0,5,0,5,0,5,0,5,0,5]])
+    print_board(board)
+
+    player = 1
+    print("terminalValue for player", player,": ",terminalValue(board,player) )
+    """
 
     
 """
