@@ -429,11 +429,13 @@ def apply_move(board, space, move, player, jump_failure_probability=0.0 ):
     (Ni,Nj) = nextspace
 
     newboard = np.copy(board)
+
+    destination = (0,0) #initialize
     
     moveIsJump = False
     if isEnemy( board[ni,nj] ,player):
         moveIsJump = True
-
+        
     if not moveIsJump:
         newboard[ni,nj] = board[i,j]
         newboard[i,j] = 0
@@ -452,7 +454,8 @@ def apply_move(board, space, move, player, jump_failure_probability=0.0 ):
     (i,j) = destination
     imax = board.shape[0]-1
     if( (player==1 and i==0) or (player==2 and i==imax) ):
-        make_king( newboard,(i,j) )
+        print("A king has been made!")
+        newboard = make_king( newboard,(i,j) )
     
     return newboard
 
@@ -495,7 +498,8 @@ def terminalValue(board, player, time_run_out=False):
         else:
             return -1.0
         
-    
+def get_random_move(board,player):
+    return choice( get_all_moves(board,player) )
 
 """
 The purpose of the interactive game loop
@@ -528,18 +532,25 @@ def gameloop(nrows,ncols):
         move  = (0,0)     # these vals are illegal & should get caught by error checks if not changed
         while True:
             print("Player ",player,"'s turn...")
-            si = input("Choose the row of the piece you'll move (top row has index 0):")
-            sj = input("Choose the column of the piece you'll move (left column has index 0):")
-            sm  = input("Choose 1 to move right or -1 to move left:")
-            sn  = input("Choose 1 to move up or -1 to move down:")
 
-            i = int(si)
-            j = int(sj)
-            m = int(sm)
-            n = -1*int(sn)   
+            if player == 1:
+                si = input("Choose the row of the piece you'll move (top row has index 0):")
+                sj = input("Choose the column of the piece you'll move (left column has index 0):")
+                sm  = input("Choose 1 to move right or -1 to move left:")
+                sn  = input("Choose 1 to move up or -1 to move down:")
+                
+                i = int(si)
+                j = int(sj)
+                m = int(sm)
+                n = -1*int(sn)   
         
-            space = (i,j)
-            move  = (n,m)
+                space = (i,j)
+                move  = (n,m)
+                
+            if player == 2:
+                moveandspace = get_random_move(board,player)
+                space = moveandspace[0]
+                move  = moveandspace[1]
 
             print( space,move )
             print( board[i,j] )
@@ -578,6 +589,24 @@ def gameloop(nrows,ncols):
 if __name__ == "__main__":
 
 
+    """
+    board = np.array([[5,1,5,1,5,1,5,1,5,0,5,1],
+                      [1,5,1,5,1,5,1,5,1,5,2,5],
+                      [5,1,5,1,5,1,5,0,5,1,5,0],
+                      [0,5,0,5,0,5,0,5,0,5,0,5],
+                      [5,0,5,0,5,0,5,0,5,0,5,0],
+                      [0,5,0,5,1,5,0,5,1,5,0,5],
+                      [5,0,5,2,5,0,5,2,5,0,5,0],
+                      [0,5,0,5,0,5,0,5,0,5,0,5],
+                      [5,0,5,0,5,0,5,0,5,0,5,0],
+                      [0,5,2,5,2,5,2,5,2,5,0,5],
+                      [5,2,5,2,5,2,5,2,5,2,5,2],
+                      [2,5,2,5,2,5,2,5,2,5,2,5]])
+    print_board(board)
+    apply_move( board, (10,1), (-1,1), 1 )
+    print_board(board)
+    """
+    
     gameloop(12,12)
 
     """
