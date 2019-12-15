@@ -98,20 +98,19 @@ def compress_board(board):
     size = int(board[0].size / 2)
     new_board = np.zeros((board[0].size, size), dtype=np.int16)
     for i in range(0, board[0].size):
-        new_board[i] = (board[i])[board[i] >= 0]
+        new_board[i] = (board[i])[board[i] < 5]
     return new_board
 
 
-def get_state(board, player):
-    board = compress_board(board)
-    state = np.zeros((board[0].size, board[:, 0].size, 5), dtype=np.int16)
+def get_state2(board1, player):
+    board = compress_board(board1)
+    state = np.zeros((5, board[:, 0].size, board[0].size), dtype=np.int16)
     state[3, :, :] = board/4
     state[2, :, :] = board / 3 - state[3, :, :]
     state[1, :, :] = board / 2 - state[2, :, :] - 2*state[3, :, :]
     state[0, :, :] = board - 2*state[1, :, :] - 3*state[2, :, :] - 4*state[3, :, :]
     if player == 1:
         state[4, :, :] = 1
-
     return state
 
 
