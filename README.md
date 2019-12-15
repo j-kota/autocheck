@@ -54,7 +54,10 @@ def policy(node, temp=1): To calculate the policy
 def MCTS_self_play(): The self play function
 ```
 # CNN class
-
+```bash
+class Net(nn.Module):The CNN class with one concolution layer
+class ErrorFnc(nn.Module): Use mean square error to calculate the loos function
+```
 
 
 # Training
