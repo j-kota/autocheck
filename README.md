@@ -9,8 +9,11 @@ In the repository,
 # Game Rules
 The game follows most os the rule of checkers with two majority of changes: 1. When jumping accross an enemy, the enemy will be remove base on a probability, so it is not guarantee to be removed. 2. When a pawn(soldier) reach the last row of the opponents territory, it holds a probability of turning into a king, so it is not guarantee to turn into a king as well.
 # How to run
-The self_play function: The tree will play against the randomw function
+```bash
+The self_play function: The tree(player) will play against a baseline opponent 
+which always plays its turn by choosing an action uniformly at random
 The evaluate function: Everything will combine together, starting with the search tree, train by the neural network, than update the data.
+```
 # Game Functions
 ```bash
 def make_king(board,space): Switch a pawn(soldier) to a king
