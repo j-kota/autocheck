@@ -5,7 +5,11 @@ https://github.com/plkmo/AlphaZero_Connect4
 # Game Size
 Will be varied through 8,10,12,14,16
 # Contents:
-In the repository, 
+```bash
+checkers_Nnet.py: File for neural network
+mcts.py: Implementing the MCTS and self play included in this file
+checkers.py: All the game functions are in the file.
+```
 # Game Rules
 The game follows most os the rule of checkers with two majority of changes: 1. When jumping accross an enemy, the enemy will be remove base on a probability, so it is not guarantee to be removed. 2. When a pawn(soldier) reach the last row of the opponents territory, it holds a probability of turning into a king, so it is not guarantee to turn into a king as well.
 # How to run
