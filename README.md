@@ -11,7 +11,7 @@ mcts.py: Implementing the MCTS and self play included in this file
 checkers.py: All the game functions are in the file.
 ```
 # Game Rules
-The game follows most os the rule of checkers with two majority of changes: 1. When jumping accross an enemy, the enemy will be remove base on a probability, so it is not guarantee to be removed. 2. When a pawn(soldier) reach the last row of the opponents territory, it holds a probability of turning into a king, so it is not guarantee to turn into a king as well.
+The game rules of our modified Checkers follow the standard rules of Checkers but with two additional rules. 1. When a piece is jumped, it has a chance to remain on the board, unaffected. 2. Sequences of double-jumps are not allowed. 
 # How to run
 ```bash
 The self_play function: The tree(player) will play against a baseline opponent 
