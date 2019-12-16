@@ -3,7 +3,7 @@ AI for Checkers
 # Reference and model
 https://github.com/plkmo/AlphaZero_Connect4
 # Game Size
-Will be varied through 8,10,12,14,16
+Will be varied through 6, 8,10,12,14
 # Contents:
 ```bash
 checkers_Nnet.py: File for neural network
