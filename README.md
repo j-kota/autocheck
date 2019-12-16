@@ -61,5 +61,3 @@ class Net(nn.Module):The CNN class with one concolution layer
 class ErrorFnc(nn.Module): Use mean square error to calculate the loos function
 ```
 
-
-# Training
